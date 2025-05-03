@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mood-Based Music Recommender</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; text-align: center; padding: 40px; }
+        h1 { color: #333; }
+        input[type=text] {
+            padding: 10px;
+            width: 300px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        input[type=submit] {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .playlist {
+            margin-top: 30px;
+        }
+        iframe {
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎵 Mood-Based Music Recommender</h1>
+
+    <!-- Form for mood input -->
+    <form method="post">
+        <input type="text" name="mood" placeholder="Type your mood (e.g., happy, sad)" required>
+        <input type="submit" value="Get Playlist">
+    </form>
+
+    <!-- Form for sentence input -->
+    <form method="post">
+        <input type="text" name="sentence" placeholder="Type a sentence to detect mood" required>
+        <input type="submit" value="Detect Mood">
+    </form>
+
+    {% if embed_url %}
+    <div class="playlist">
+        <p>You’re feeling <strong>{{ mood }}</strong>. Here’s your playlist:</p>
+        <iframe src="{{ embed_url }}" width="300" height="380" frameborder="0"
+                allowtransparency="true" allow="encrypted-media"></iframe>
+    </div>
+    {% elif message %}
+    <div class="playlist">
+        <p>{{ message }}</p>
+    </div>
+    {% endif %}
+</body>
+</html>
